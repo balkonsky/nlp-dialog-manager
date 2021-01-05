@@ -1,0 +1,141 @@
+{
+  "states": [
+    {
+      "state_id": "1",
+      "is_init_state": true,
+      "title": "Вернуться в главное меню",
+      "actions": [
+        {
+          "type": "condition_check",
+          "parameters": {
+            "condition_check_param": {
+              "condition_id": "1004",
+              "success_check_step_id": "1",
+              "fail_check_step_id": "2"
+            }
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step_id": "1",
+          "state_id": "3"
+        },
+        {
+          "step_id": "2",
+          "state_id": "2"
+        }
+      ]
+    },
+    {
+      "state_id": "14",
+      "title": "Ошибка при вложении - клиент нажал на кнопку?",
+      "actions": [
+        {
+          "type": "condition_check",
+          "parameters": {
+            "condition_check_param": {
+              "condition_id": "1008",
+              "success_check_step_id": "1",
+              "fail_check_step_id": "2"
+            }
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step_id": "1",
+          "state_id": "operator"
+        },
+        {
+          "step_id": "2",
+          "state_id": "send_operator_buttons"
+        }
+      ]
+    },
+    {
+      "state_id": "button_check_state",
+      "title": "Проверка кнопок",
+      "actions": [
+        {
+          "type": "button_check",
+          "parameters": {
+          }
+        }
+      ],
+      "steps": [
+      ]
+    },
+    {
+      "state_id": "more_than_one_file",
+      "title": "Приложено более одного файла",
+      "actions": [
+        {
+          "type": "send_message",
+          "parameters": {
+            "ru_message_text": "Допустимо добавление только одного файла.",
+            "en_message_text": "Only one file can be added. ",
+            "uz_message_text": "Faqat bitta fayl qo'shilishi mumkin."
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step_id": "1",
+          "state_id": "9"
+        }
+      ]
+    },
+    {
+      "state_id": "operator",
+      "title": "Обратиться к оператору",
+      "actions": [
+        {
+          "type": "send_message",
+          "parameters": {
+            "ru_message_text": "Перевожу вас на специалиста поддержки",
+            "en_message_text": "Transferring to a customer support agent",
+            "uz_message_text": "Sizni operator bilan bog'layman"
+          }
+        },
+        {
+          "type": "redirect_to_queue",
+          "parameters": {
+            "queue_name": "chat"
+          }
+        }
+      ]
+    },
+    {
+      "state_id": "send_operator_buttons",
+      "title": "Обратиться к оператору по кнопке",
+      "actions": [
+        {
+          "type": "send_message",
+          "parameters": {
+            "ru_message_text": "Если у вас есть вопросы, пожалуйста, обратитесь в чат поддержки на сайте.",
+            "uz_message_text": "Agar sizda biron bir savol bo'lsa, iltimos.",
+            "en_message_text": "If you have any questions, please contact the support chat."
+          }
+        }
+      ]
+    }
+  ],
+  "errors": {
+    "unrecognized_response": {
+      "actions": [
+        {
+          "type": "send_message",
+          "parameters": {
+            "ru_message_text": "Вы ввели неправильный текст, попробуйте еще раз ввести цифру одного из пунктов меню."
+          }
+        }
+      ]
+    }
+  },
+  "general_properties": {
+    "steps_header": "Введите цифру одного из пунктов меню:",
+    "steps_template": "{0} - {1}\n",
+    "message_if_no_operators_online": "К сожалению, сейчас нет операторов онлайн. Пожалуйста, обратитесь в рабочее время с 09:00 до 22:00"
+  }
+}
